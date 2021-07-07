@@ -13,10 +13,10 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab)  =>{
       var p = JSON.parse(JSON.stringify(param));
 
       if(param.urlscheme == undefined) continue;
-      const urlscheme = p.urlscheme.replace(/\//g, '\\\/');
-      console.log(`urlscheme: ${urlscheme}`)
+      //const urlscheme = p.urlscheme.replace(/\//g, '\\\/');
+      //console.log(`urlscheme: ${urlscheme}`)
 
-      if(RegExp(`^${urlscheme}`).test(tab.url)) return;
+      //if(RegExp(`^${urlscheme}`).test(tab.url)) return;
 
       if(param.url == undefined) continue;
       const url = p.url.replace(/\//g, '\\\/');
@@ -24,7 +24,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab)  =>{
       
       if(RegExp(`^${url}`).test(tab.url)){
         const addr = `${param.urlscheme}${tab.url}`
-        //console.log(`Open URL: ${addr}`);
+        console.log(`Open URL: ${addr}`);
         chrome.tabs.getSelected(null, async (tab) => {
           chrome.tabs.remove(tab.id)
         })
@@ -44,7 +44,7 @@ const load = () => {
         { urlscheme: value.urlscheme1, url: value.url1},
         { urlscheme: value.urlscheme2, url: value.url2}
       ];
-      console.log(parameter)
+      //console.log(parameter)
     });
   }
   catch(e){

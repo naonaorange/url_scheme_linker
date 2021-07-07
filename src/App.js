@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 
 function App() {
+  const version = '1.0';
   const [cells, setCells] = useState([
     { urlscheme: '', url: ''},
     { urlscheme: '', url: ''},
@@ -31,7 +32,7 @@ function App() {
     try{
       chrome.storage.local.set({
         'urlscheme0': urlscheme0, 'urlscheme1': urlscheme1, 'urlscheme2': urlscheme2,
-        'url0': url0, 'url1': url1, 'url2': url2,
+        'url0': url0, 'url1': url1, 'url2': url2, 'version': version,
       }, () => {alert('The parameter is changed.')});
     }
     catch(e){
