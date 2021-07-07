@@ -10,18 +10,11 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab)  =>{
 
   try{
     for (const param of parameter){
-      var p = JSON.parse(JSON.stringify(param));
-
       if(param.urlscheme == undefined) continue;
-      //const urlscheme = p.urlscheme.replace(/\//g, '\\\/');
-      //console.log(`urlscheme: ${urlscheme}`)
-
-      //if(RegExp(`^${urlscheme}`).test(tab.url)) return;
-
       if(param.url == undefined) continue;
+
+      var p = JSON.parse(JSON.stringify(param));
       const url = p.url.replace(/\//g, '\\\/');
-      //console.log(`url: ${url}`)
-      
       if(RegExp(`^${url}`).test(tab.url)){
         const addr = `${param.urlscheme}${tab.url}`
         console.log(`Open URL: ${addr}`);

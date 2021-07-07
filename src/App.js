@@ -99,9 +99,9 @@ function App() {
     <div>
       <h1>URL Scheme Linker Setting</h1>
       <h3>URL Scheme:</h3>
-      <a>URL scheme prefix string if it meet URL condition.</a>
-      <h3>URL Condition:</h3>
-      <a>URL condition: URL string condition for search</a>
+      <a>URL scheme prefix string if it meet URL pattern.</a>
+      <h3>URL Pattern:</h3>
+      <a>URL pattern: URL string pattern for search</a>
       <h3></h3>
       <a>*Please re-open Chrome if you save the parameter.</a>
       <h3></h3>
@@ -109,7 +109,7 @@ function App() {
         <thead>
           <tr>
             <td>{'URL Scheme'}</td>
-            <td>{'URL condition'}</td>
+            <td>{'URL Pattern'}</td>
           </tr>
         </thead>
         <tbody>
