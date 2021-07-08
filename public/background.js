@@ -6,12 +6,16 @@ chrome.windows.onCreated.addListener(async() => {
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab)  =>{
   if (changeInfo.status != "complete") return;
-  if (parameter == undefined) return;
+  if ((parameter == undefined) || (parameter == null)) return;
+  if (Array.isArray(parameter) == false) return;
+  if (parameter.length == 0) return;
+  if ((parameter[0].urlscheme == undefined) || (parameter[0].urlscheme == "")) return;
+  if ((parameter[0].url == undefined) || (parameter[0].url == "")) return;
 
   try{
     for (const param of parameter){
-      if(param.urlscheme == undefined) continue;
-      if(param.url == undefined) continue;
+      if ((param.urlscheme == undefined) || (param.urlscheme == "")) return;
+      if ((param.url == undefined) || (param.url == "")) return;
 
       var p = JSON.parse(JSON.stringify(param));
       const url = p.url.replace(/\//g, '\\\/');
@@ -22,6 +26,9 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab)  =>{
           chrome.tabs.remove(tab.id)
         })
         await chrome.tabs.create({url: addr});
+        (async () => {
+          await new Promise(resolve => setTimeout(resolve, 300));
+        })();
       }
     }
   }
