@@ -13,7 +13,8 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab)  =>{
 
   if ((parameter == undefined) || (parameter == null)){
     console.log('ERROR: parameter is null');
-    return;
+    load();
+    //return;
   }
   if (Array.isArray(parameter) == false){
     console.log(`ERROR: parameter is not array  ${parameter}`);
@@ -59,9 +60,11 @@ const load = () => {
         { urlscheme: value.urlscheme1, url: value.url1},
         { urlscheme: value.urlscheme2, url: value.url2}
       ];
-      //console.log(parameter)
+      console.log(`Parameter: ${parameter}`);
+
     });
   }
   catch(e){
+    console.log(`ERROR: Can't load parameter: ${parameter}`);
   }
 }
