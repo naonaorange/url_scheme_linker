@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 
 function App() {
-  const version = '1.1';
+  const version = '1.2';
   const [cells, setCells] = useState([
     { urlscheme: '', url: ''},
     { urlscheme: '', url: ''},
