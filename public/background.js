@@ -24,11 +24,11 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab)  =>{
     return;
   }
   if ((parameter[0].urlscheme == undefined) || (parameter[0].urlscheme == "")){
-    console.log(`ERROR: parameter[0].urlscheme is null  ${parameter[0].urlscheme}`);
+    console.log(`ERROR: parameter[0].urlscheme is illegal  ${parameter[0].urlscheme}`);
     return;
   }
   if ((parameter[0].url == undefined) || (parameter[0].url == "")){
-    console.log(`ERROR: parameter[0].url is null  ${parameter[0].url}`);
+    console.log(`ERROR: parameter[0].url is illegal  ${parameter[0].url}`);
     return;
   }
 
@@ -42,9 +42,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab)  =>{
       if(RegExp(`^${url}`).test(tab.url)){
         const addr = `${param.urlscheme}${tab.url}`
         console.log(`Open URL: ${addr}`);
-        chrome.tabs.getSelected(null, async (tab) => {
-          chrome.tabs.remove(tab.id)
-        })
+        chrome.tabs.remove(tab.id)
         await chrome.tabs.create({url: addr});
       }
     }
