@@ -5,12 +5,32 @@ chrome.windows.onCreated.addListener(async() => {
 })
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab)  =>{
-  if (changeInfo.status != "complete") return;
-  if ((parameter == undefined) || (parameter == null)) return;
-  if (Array.isArray(parameter) == false) return;
-  if (parameter.length == 0) return;
-  if ((parameter[0].urlscheme == undefined) || (parameter[0].urlscheme == "")) return;
-  if ((parameter[0].url == undefined) || (parameter[0].url == "")) return;
+  if (changeInfo.status != "complete"){
+    return;
+  }else{
+    console.log('Complete Event');
+  }
+
+  if ((parameter == undefined) || (parameter == null)){
+    console.log('ERROR: parameter is null');
+    return;
+  }
+  if (Array.isArray(parameter) == false){
+    console.log(`ERROR: parameter is not array  ${parameter}`);
+    return;
+  }
+  if (parameter.length == 0){
+    console.log(`ERROR: parameter length is 0  ${parameter}`);
+    return;
+  }
+  if ((parameter[0].urlscheme == undefined) || (parameter[0].urlscheme == "")){
+    console.log(`ERROR: parameter[0].urlscheme is null  ${parameter[0].urlscheme}`);
+    return;
+  }
+  if ((parameter[0].url == undefined) || (parameter[0].url == "")){
+    console.log(`ERROR: parameter[0].url is null  ${parameter[0].url}`);
+    return;
+  }
 
   try{
     for (const param of parameter){
@@ -26,9 +46,6 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab)  =>{
           chrome.tabs.remove(tab.id)
         })
         await chrome.tabs.create({url: addr});
-        (async () => {
-          await new Promise(resolve => setTimeout(resolve, 300));
-        })();
       }
     }
   }
